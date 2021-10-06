@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 #nullable disable
 
-namespace StorePromotion.API.Models
+namespace StorePromotion.Common.Models
 {
     public partial class StorePromotionsContext : DbContext
     {

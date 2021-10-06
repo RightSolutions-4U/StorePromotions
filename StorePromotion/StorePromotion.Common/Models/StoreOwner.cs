@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 #nullable disable
 
-namespace StorePromotion.API.Models
+namespace StorePromotion.Common.Models
 {
     public partial class StoreOwner
     {

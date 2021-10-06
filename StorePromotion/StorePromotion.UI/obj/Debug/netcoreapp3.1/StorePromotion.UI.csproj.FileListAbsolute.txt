@@ -77,3 +77,10 @@ D:\WorkNew\StorePromotion\StorePromotion\StorePromotion.UI\obj\Debug\netcoreapp3
 D:\WorkNew\StorePromotion\StorePromotion\StorePromotion.UI\obj\Debug\netcoreapp3.1\StorePromotion.UI.dll
 D:\WorkNew\StorePromotion\StorePromotion\StorePromotion.UI\obj\Debug\netcoreapp3.1\StorePromotion.UI.pdb
 D:\WorkNew\StorePromotion\StorePromotion\StorePromotion.UI\obj\Debug\netcoreapp3.1\StorePromotion.UI.genruntimeconfig.cache
+D:\WorkNew\StorePromotion\StorePromotion\StorePromotion.UI\bin\Debug\netcoreapp3.1\StorePromotion.Common.Views.dll
+D:\WorkNew\StorePromotion\StorePromotion\StorePromotion.UI\bin\Debug\netcoreapp3.1\StorePromotion.Common.Views.pdb
+D:\WorkNew\StorePromotion\StorePromotion\StorePromotion.UI\bin\Debug\netcoreapp3.1\StorePromotion.UI.StaticWebAssets.xml
+D:\WorkNew\StorePromotion\StorePromotion\StorePromotion.UI\bin\Debug\netcoreapp3.1\System.Web.Helpers.dll
+D:\WorkNew\StorePromotion\StorePromotion\StorePromotion.UI\bin\Debug\netcoreapp3.1\StorePromotion.Common.dll
+D:\WorkNew\StorePromotion\StorePromotion\StorePromotion.UI\bin\Debug\netcoreapp3.1\StorePromotion.Common.pdb
+D:\WorkNew\StorePromotion\StorePromotion\StorePromotion.UI\obj\Debug\netcoreapp3.1\StorePromotion.UI.MvcApplicationPartsAssemblyInfo.cs

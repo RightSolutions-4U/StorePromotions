@@ -1,1 +1,3 @@
-﻿<StaticWebAssets Version="1.0" />
+﻿<StaticWebAssets Version="1.0">
+  <ContentRoot BasePath="_content/StorePromotion.Common" Path="D:\WorkNew\StorePromotion\StorePromotion\StorePromotion.Common\wwwroot\" />
+</StaticWebAssets>
