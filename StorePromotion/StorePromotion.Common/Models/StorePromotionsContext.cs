@@ -40,7 +40,7 @@ namespace StorePromotion.Common.Models
 
             modelBuilder.Entity<AdminUser>(entity =>
             {
-                entity.HasNoKey();
+                entity.HasKey(e => new { e.UserId});
 
                 entity.ToTable("AdminUser");
 
