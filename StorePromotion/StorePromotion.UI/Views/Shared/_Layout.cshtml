@@ -5,28 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Store Promotion</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.9.2/tailwind.min.css">
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">-->
+
+    <!-- jQuery library -->
+    @*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>*@
+
+    <!-- Latest compiled JavaScript -->
+    <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>-->
     <!-- Small CSS to Hide elements at 1520px size -->
     @*<style>
-        #media(max-width:1520px) {
-            .left-svg {
-                display: none;
+            #media(max-width:1520px) {
+                .left-svg {
+                    display: none;
+                }
             }
-        }
 
-        /* small css for the mobile nav close */
-        #nav-mobile-btn.close span:first-child {
-            transform: rotate(45deg);
-            top: 4px;
-            position: relative;
-            background: #a0aec0;
-        }
+            /* small css for the mobile nav close */
+            #nav-mobile-btn.close span:first-child {
+                transform: rotate(45deg);
+                top: 4px;
+                position: relative;
+                background: #a0aec0;
+            }
 
-        #nav-mobile-btn.close span:nth-child(2) {
-            transform: rotate(-45deg);
-            margin-top: 0px;
-            background: #a0aec0;
-        }
-    </style>*@
+            #nav-mobile-btn.close span:nth-child(2) {
+                transform: rotate(-45deg);
+                margin-top: 0px;
+                background: #a0aec0;
+            }
+        </style>*@
 
 </head>
 <body class="overflow-x-hidden antialiased">
@@ -47,10 +54,10 @@
 
             <nav id="nav"
                  class="absolute top-0 left-0 z-50 flex flex-col items-center justify-between hidden w-full h-64 pt-5 mt-24 text-sm text-gray-800 bg-white border-t border-gray-200 md:w-auto md:flex-row md:h-24 lg:text-base md:bg-transparent md:mt-0 md:border-none md:py-0 md:flex md:relative">
-                <a href="#"
+                <a href="@Url.Action("Index", "Home")"
                    class="ml-0 mr-0 font-bold duration-100 md:ml-12 md:mr-3 lg:mr-8 transition-color hover:text-indigo-600">Home</a>
-                <a href="#features"
-                   class="mr-0 font-bold duration-100 md:mr-3 lg:mr-8 transition-color hover:text-indigo-600">Features</a>
+                <a href="@Url.Action("Index", "StoreOwner")"
+                   class="mr-0 font-bold duration-100 md:mr-3 lg:mr-8 transition-color hover:text-indigo-600">Register</a>
                 <a href="#pricing"
                    class="mr-0 font-bold duration-100 md:mr-3 lg:mr-8 transition-color hover:text-indigo-600">Pricing</a>
                 <a href="#testimonials"
