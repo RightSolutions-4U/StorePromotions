@@ -16,5 +16,6 @@ namespace StorePromotion.Common.Models
         public string StateId { get; set; }
         public bool? IsActive { get; set; }
         public string Qrurl { get; set; }
+        public string MessageText { get; set; }
     }
 }

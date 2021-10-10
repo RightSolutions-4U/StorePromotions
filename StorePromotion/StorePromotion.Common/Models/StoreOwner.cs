@@ -12,6 +12,8 @@ namespace StorePromotion.Common.Models
         public string Lname { get; set; }
         public string CellNo { get; set; }
         public string Email { get; set; }
+        public string UserId { get; set; }
+        public string Pwd { get; set; }
         public bool? IsActive { get; set; }
     }
 }

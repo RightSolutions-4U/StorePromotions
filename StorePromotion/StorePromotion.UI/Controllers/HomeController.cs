@@ -20,7 +20,7 @@ namespace StorePromotion.UI.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            return View("register");
         }
 
         public IActionResult Privacy()

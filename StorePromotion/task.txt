@@ -1,0 +1,6 @@
+home
+login/store owner register
+stores 
+campaign
+storeowner add userid and password
+add field to store to add message like scan qrcode or whatever

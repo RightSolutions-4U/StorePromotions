@@ -39,6 +39,20 @@ namespace StorePromotion.API.Controllers
             return adminUser;
         }
 
+        [HttpGet("GetStoreOwnerWithPwd")]
+        public ActionResult<StoreOwner> GetStoreOwnerWithPwd(string userId, string pwd)
+        {
+            bool StoreOwnerExists;
+            StoreOwnerExists = _context.StoreOwners.Any(e => e.UserId == userId && e.Pwd == pwd);
+
+            if (StoreOwnerExists == false)
+            {
+                return NotFound();
+            }
+            var storeOwner = _context.StoreOwners.SingleOrDefault(e => e.UserId == userId);
+            return storeOwner;
+        }
+
         // PUT: api/AdminUser/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
