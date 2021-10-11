@@ -32,8 +32,8 @@ namespace StorePromotion.UI.Controllers
         }
 
         // POST: StoreOwnerController/Create
-        [HttpPost("CreateStoreOwner")]
-        public async Task<ActionResult<StoreOwner>> CreateStoreOwner(IFormCollection collection)
+        [HttpPost]
+        public async Task<ActionResult<StoreOwner>> Create(IFormCollection collection)
         {
             try
             {
@@ -50,7 +50,7 @@ namespace StorePromotion.UI.Controllers
                 };
                 string output = JsonConvert.SerializeObject(storeOwner);
                 var data = new StringContent(output, Encoding.UTF8, "application/json");
-                var url = "https://localhost:44356/api/StoreOwner";
+                var url = "https://localhost:44303/api/StoreOwner/PostStoreOwner";
                 /*var url = "https://localhost:44356/api/Addresses";*/
 
                 var client = new HttpClient();
@@ -62,7 +62,7 @@ namespace StorePromotion.UI.Controllers
                 /*return RedirectToAction(nameof(Index));*/
                 return RedirectToAction("Store");
             }
-            catch
+            catch(Exception e)
             {
                 return View();
             }
