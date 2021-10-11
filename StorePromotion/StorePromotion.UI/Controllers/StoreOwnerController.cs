@@ -32,8 +32,8 @@ namespace StorePromotion.UI.Controllers
         }
 
         // POST: StoreOwnerController/Create
-        [HttpPost]
-        public async Task<ActionResult<StoreOwner>> Create(IFormCollection collection)
+        [HttpPost("CreateStoreOwner")]
+        public async Task<ActionResult<StoreOwner>> CreateStoreOwner(IFormCollection collection)
         {
             try
             {
@@ -58,8 +58,9 @@ namespace StorePromotion.UI.Controllers
                 var StoreOwner = response.Content.ReadAsStringAsync().Result;
                 var StoreOwner1 = JsonConvert.DeserializeObject<StoreOwner>(StoreOwner);
                 var StoreOwnerName = StoreOwner1.Fname;
-                ViewBag.Name = StoreOwnerName;
-                return RedirectToAction(nameof(Index));
+                ViewBag.OwnerName = StoreOwnerName;
+                /*return RedirectToAction(nameof(Index));*/
+                return RedirectToAction("Store");
             }
             catch
             {

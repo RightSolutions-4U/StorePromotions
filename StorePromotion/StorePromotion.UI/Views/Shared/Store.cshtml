@@ -1,5 +1,6 @@
 ﻿    <!-- Start Contact -->
 <section class="container py-5">
+    <h3 class="col-12 col-xl-8 h2 text-left text-primary pt-3">Welcome @ViewBag.OwnerName  </h3>
 
     <h1 class="col-12 col-xl-8 h2 text-left text-primary pt-3">Store Owner</h1>
     <p class="col-12 col-xl-8 text-left text-muted pb-5 light-300">
@@ -11,7 +12,7 @@
 
         <!-- Start Contact Form -->
         <div class="col-lg-12 ">
-            <form class="contact-form row" method="post" role="form">
+            <form class="contact-form row" method="post" action="#" role="form">
 
                 <div class="col-lg-6 mb-4">
                     <div class="form-floating">
@@ -60,42 +61,9 @@
                 </div>
 
                 <div class="col-md-12 col-12 m-auto text-end">
-                    @*<button type="submit" class="btn btn-secondary rounded-pill px-md-5 px-4 py-2 radius-0 text-light light-300">Save Info.</button>*@
-                    @*<button type="submit" class="btn btn-secondary rounded-pill px-md-5 px-4 py-2 radius-0 text-light light-300">Save Info.</button>*@
-                    <input class="btn btn-secondary rounded-pill px-md-5 px-4 py-2 radius-0 text-light light-300" type="submit" value="Submit" onclick="Register1()">
+                    <button type="submit" class="btn btn-secondary rounded-pill px-md-5 px-4 py-2 radius-0 text-light light-300">Save Info.</button>
                 </div>
-                <script>
-                    function Register1() {
-                        var FName = $('#Fname').val();
-                        var LName = $('#Lname').val();
-                        var CellNo = $('#CellNo').val();
-                        var Email1 = $('#Email').val();
-                        var UserId = $('#UserId').val();
-                        var Pwd1 = $('#Pwd').val();
-                        var MyStoreOwner = {
-                            FName: Fname,
-                            LName: LName,
-                            Password: CellNo,
-                            Email: Email1,
-                            UserId: UserId,
-                            Pwd: Pwd1
-                        }
-                        alert(MyStoreOwner);
-                        $.ajax({
-                            url: 'https://localhost:44328/StoreOwner/CreateStoreOwner',
-                            type: 'POST',
-                            dataType: 'json',
-                            contentType: 'application/json; charset=utf-8',
-                            data: JSON.stringify(MyStoreOwner)
-                            , success: function (result) {
-                                alert("Registered: ");
-                            }
-                            , error: function (result) {
-                                alert("err " + result.responseText);
-                            }
-                        })
-                    }
-                </script>
+
             </form>
         </div>
         <!-- End Contact Form -->
