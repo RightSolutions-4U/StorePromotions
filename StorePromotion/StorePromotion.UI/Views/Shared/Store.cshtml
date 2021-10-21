@@ -1,74 +1,135 @@
-﻿    <!-- Start Contact -->
-<section class="container py-5">
-    <h3 class="col-12 col-xl-8 h2 text-left text-primary pt-3">Welcome @ViewBag.OwnerName  </h3>
-
-    <h1 class="col-12 col-xl-8 h2 text-left text-primary pt-3">Store Owner</h1>
-    <p class="col-12 col-xl-8 text-left text-muted pb-5 light-300">
-        Please fill details to get register!
-    </p>
-
-    <div class="row pb-4">
-
-
-        <!-- Start Contact Form -->
-        <div class="col-lg-12 ">
-            <form class="contact-form row" method="post" action="#" role="form">
-
-                <div class="col-lg-6 mb-4">
-                    <div class="form-floating">
-                        <input type="text" class="form-control form-control-lg light-300" id="Fname" name="Fname" placeholder="First Name">
-                        <label for="Fname light-300">First Name</label>
-                    </div>
-                </div><!-- End Input Name -->
-                <div class="col-lg-6 mb-4">
-                    <div class="form-floating">
-                        <input type="text" class="form-control form-control-lg light-300" id="Lname" name="Lname" placeholder="Last Name">
-                        <label for="Lname light-300">Last Name</label>
-                    </div>
-                </div><!-- End Input Name -->
-                <div class="col-lg-6 mb-4">
-                    <div class="form-floating">
-                        <input type="text" class="form-control form-control-lg light-300" id="CellNo" name="CellNo" placeholder="CellNo">
-                        <label for="CellNo light-300">Cell No.</label>
-                    </div>
-                </div>
-                <div class="col-lg-6 mb-4">
-                    <div class="form-floating">
-                        <input type="text" class="form-control form-control-lg light-300" id="Email" name="Email" placeholder="Email">
-                        <label for="Email light-300">Email</label>
-                    </div>
-                </div><!-- End Input Email -->
-
-                <div class="col-lg-6 mb-4">
-                    <div class="form-floating">
-                        <input type="text" class="form-control form-control-lg light-300" id="UserId" name="UserId" placeholder="User Id">
-                        <label for="UserId light-300">User Id</label>
-                    </div>
-                </div><!-- End Input Phone -->
-
-                <div class="col-lg-6 mb-4">
-                    <div class="form-floating">
-                        <input type="text" class="form-control form-control-lg light-300" id="Pwd" name="Pwd" placeholder="Pwd">
-                        <label for="Pwd light-300">Password</label>
+﻿<div class="container">
+    <h3 class="tittle-w3layouts h2 text-left text-primary pt-3">Welcome </h3>
+    <div class="inner_sec">
+        <div class="row border">
+            <div class="col-md-2">
+                <div class="border-end bg-white" id="sidebar-wrapper">
+                    <div class="sidebar-heading border-bottom bg-light"></div>
+                    <div class="list-group list-group-flush">
+                        <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Stores</a>
+                        <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Edit Profile</a>
+                        <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Change Password</a>
+                        <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Send Campaign</a>
                     </div>
                 </div>
 
-                <div class="col-lg-6 mb-4">
-                    <div class="form-floating">
-                        <input type="text" class="form-control form-control-lg light-300" id="CPwd" name="CPwd" placeholder="CPwd">
-                        <label for="CPwd light-300">Confirm Password</label>
+            </div>
+            <div class="col-md-10 border">
+                <h3 class="col-10 col-xl-8 h2 text-left text-primary pt-3"></h3>
+                    <div id="addStore" style="display:none">
+                        <div id="default" style="width:99%;align-self:center;align-content:center">
+                            <form id="frmStore" method="post">
+                                <table width="100%">
+                                    <tr valign="middle">
+                                        <td width="50%">
+                                            <h4>Add Store</h4>
+                                        </td>
+                                        <td width="50%" align="right">
+                                            <button type="button" class="btn btn-primary" onclick="hideme('defaultdiv'); location.reload()">Cancel</button>
+                                            <button type="button" class="btn btn-primary submit mb-4" onclick="PostStore()">Save</button>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <div style="width:90%;align-self:center;align-content:center">
+
+                                    <div class="col-md-6 con-left">
+                                        <div class="form-group" style="text-align:left">
+                                            <label class="my-2">Store Name</label>
+                                            <input type="hidden" name="StoreId" id="StoreId">
+                                            <input class="form-control" type="text" name="StoreName" id="StoreName" placeholder="" required="" style="width:500px;">
+                                        </div>
+                                        <div class="form-group" style="text-align:left">
+                                            <label class="my-2">Address 1</label>
+                                            <input class="form-control" type="text" name="Address1" id="Address1" placeholder="" required="" style="width:500px;">
+                                        </div>
+                                        <div class="form-group" style="text-align:left">
+                                            <label>Address 2 </label>
+                                            <input class="form-control" type="text" name="Address2" id="Address2" placeholder="" required="" style="width:500px;">
+                                        </div>
+
+                                        <div class="form-group" style="text-align:left">
+                                            <select class="form-control" name="CityId" id="CityId">
+
+                                                <option value="x">Select City</option>";
+                                            </select>
+                                            <script>
+                                                function populateCity() {
+                                                    $.ajax({
+                                                        url: 'https://localhost:44356/api/City/GetCities',
+                                                        type: 'GET',
+                                                        success: function (result) {
+                                                            var markup = "<option value='x'>Select City</option>";
+                                                            var i;
+                                                            for (i = 0; i < result.length; i++) {
+                                                                markup += "<option value=" + JSON.stringify(result[i].CityId) + ">" + JSON.stringify(result[i].CityName) + "</option>";
+                                                            }
+                                                            $("#CityId-").html(markup).show();
+                                                        },
+                                                        error:
+                                                            function (result) {
+
+                                                                alert("error : " + result.responseText);
+                                                            }
+                                                    });
+                                                }
+                                            </script>
+                                        </div>
+                                        <div class="form-group" style="text-align:left">
+                                            <label class="my-2">MessageText</label>
+                                            <textarea class="form-control" name="MessageText" id="MessageText"></textarea>
+                                        </div>
+                                        <div>
+                                            <input type="hidden" align="right" name="QRURL" id="QRURL">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <script>
+                                    function PostProduct() {
+                                        var StName = $('#StoreName').val();
+                                        var Address1 = $('#Address1').val();
+                                        var Address2 = $('#Address2').val();
+                                        var CityId = $('#CityId').val();
+                                        var StateId = $('#CityId').val();
+                                        var OwnerId = '@ViewBag.OwnerId';
+                                        var MessageText = $('#MessageText').val();
+                                        var IsActive = true;
+                                        var mystore = {
+                                            StName: ProductName,
+                                            Address1: ShortDescription,
+                                            Address2: FullDescription,
+                                            CityId: Price,
+                                            StateId: Discount,
+                                            MessageText: CategoryId,
+                                            IsActive: IsActive
+                                        }
+                                        $.ajax({
+                                            url: 'https://localhost:44356/api/Store/PostStore',
+                                        type: 'POST',
+                                            dataType: 'json',
+                                                contentType: 'application/json; charset=utf-8',
+                                                    data: JSON.stringify(mystore)
+                                                        , success: function (result) {
+
+                                                            alert("New Store has been added");
+                                                            $('#StoreId').val(result.StoreId);
+
+                                                        }
+                                                                            , error: function (result) {
+                                            alert("error in Product " + result.responseText);
+                                        }
+                                    })
+                                                                    }
+                                </script>
+                            </form>
+                        </div>
+                        
+                        </div>
                     </div>
-                </div>
-
-                <div class="col-md-12 col-12 m-auto text-end">
-                    <button type="submit" class="btn btn-secondary rounded-pill px-md-5 px-4 py-2 radius-0 text-light light-300">Save Info.</button>
-                </div>
-
-            </form>
+            </div>
         </div>
-        <!-- End Contact Form -->
-
-
     </div>
-</section>
-<!-- End Contact -->
+
+
+
+

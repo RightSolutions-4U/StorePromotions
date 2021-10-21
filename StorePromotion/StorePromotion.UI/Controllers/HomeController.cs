@@ -21,6 +21,7 @@ namespace StorePromotion.UI.Controllers
         public IActionResult Index()
         {
             return View();
+            /*return View("check");*/
         }
 
         public IActionResult Privacy()

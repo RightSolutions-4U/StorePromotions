@@ -60,7 +60,7 @@ namespace StorePromotion.UI.Controllers
                 var StoreOwnerName = StoreOwner1.Fname;
                 ViewBag.OwnerName = StoreOwnerName;
                 /*return RedirectToAction(nameof(Index));*/
-                return RedirectToAction("Store");
+                return View("Store");
             }
             catch(Exception e)
             {

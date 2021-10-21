@@ -29,6 +29,17 @@ namespace StorePromotion.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<StorePromotionsContext>(options => options.UseSqlServer(Configuration.GetConnectionString("StorePromotionDatabase")));
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsApi", builder => builder.WithOrigins("https://localhost:44393")
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                /*options.AddPolicy("CorsApi", builder => builder.WithOrigins("https://test.desiclothingonline.com")
+                .AllowAnyHeader()
+                .AllowAnyMethod()*/
+                );
+            });
+
             services.AddMvc().AddControllersAsServices();
             services.AddSwaggerGen(c =>
             {
@@ -58,12 +69,13 @@ namespace StorePromotion.API
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseRouting();
-
+            app.UseCors("CorsApi");
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
+                endpoints.MapControllers()
+               .RequireCors("CorsApi");
             });
         }
     }
