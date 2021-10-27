@@ -33,3 +33,4 @@ D:\WorkNew\StorePromotion\StorePromotion\StorePromotion.Common\obj\Debug\netcore
 D:\WorkNew\StorePromotion\StorePromotion\StorePromotion.Common\obj\Debug\netcoreapp3.1\StorePromotion.Common.pdb
 D:\WorkNew\StorePromotion\StorePromotion\StorePromotion.Common\obj\Debug\netcoreapp3.1\StorePromotion.Common.genruntimeconfig.cache
 D:\WorkNew\StorePromotion\StorePromotion\StorePromotion.Common\obj\Debug\netcoreapp3.1\StorePromotion.Common.csproj.CopyComplete
+D:\WorkNew\StorePromotion\StorePromotion\StorePromotion.Common\obj\Debug\netcoreapp3.1\StorePromotion.Common.GeneratedMSBuildEditorConfig.editorconfig

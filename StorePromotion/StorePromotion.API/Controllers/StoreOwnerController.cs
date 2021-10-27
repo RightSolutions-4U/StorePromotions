@@ -27,16 +27,17 @@ namespace StorePromotion.API.Controllers
 
         // GET: api/AdminUser/5
         [HttpGet("GetStoreOwner")]
-        public async Task<ActionResult<StoreOwner>> GetStoreOwner(string id)
+        public async Task<ActionResult<StoreOwner>> GetStoreOwner(int id)
         {
-            var adminUser = await _context.StoreOwners.FindAsync(id);
+            var storeOwner = await _context.StoreOwners.FindAsync(id);
 
-            if (adminUser == null)
+
+            if (storeOwner == null)
             {
                 return NotFound();
             }
 
-            return adminUser;
+            return storeOwner;
         }
 
         [HttpGet("GetStoreOwnerWithPwd")]

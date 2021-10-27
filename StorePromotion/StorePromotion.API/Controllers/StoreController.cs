@@ -27,18 +27,32 @@ namespace StorePromotion.API.Controllers
 
         // GET: api/AdminUser/5
         [HttpGet("GetStore")]
-        public async Task<ActionResult<Store>> GetStore(int StoreId)
+        public async Task<ActionResult<Store>> GetStore(int StoreId, int StoreOwnerId)
         {
-            var adminUser = await _context.Stores.FindAsync(StoreId);
-
-            if (adminUser == null)
+            var store = await _context.Stores.FindAsync(StoreId,StoreOwnerId);
+            /*var store =  _context.Stores.Where(e => e.StoreId == StoreId);*/
+            if (store == null)
             {
                 return NotFound();
             }
 
-            return adminUser;
+            return store;
         }
-
+        //GetStoresWithOId
+        [HttpGet("GetStoresWithOId")]
+        public async Task<ActionResult<IEnumerable<Store>>> GetStoresWithOId(int OwnerId)
+        {
+            try
+            {
+                var store = await _context.Stores.Where(a => a.OwnerId == OwnerId)
+                    .ToListAsync();
+                return store;
+            }
+            catch(Exception e) {
+                var msg = e.Message;
+            }
+            return NotFound();
+        }
         // PUT: api/AdminUser/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
@@ -76,6 +90,10 @@ namespace StorePromotion.API.Controllers
         {
             _context.Stores.Add(Store);
             await _context.SaveChangesAsync();
+            
+            //Add code to generate QRCode file and path
+            //Update current store record with QRCode URL
+            
 
             return CreatedAtAction("GetStore", new { id = Store.StoreId }, Store);
         }

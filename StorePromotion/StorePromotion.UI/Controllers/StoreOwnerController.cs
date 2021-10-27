@@ -25,6 +25,52 @@ namespace StorePromotion.UI.Controllers
             return View();
         }
 
+        //Add code to call api to check store owner login
+        public async Task<ActionResult<StoreOwner>> CheckOwnerLogin(IFormCollection  collection)
+        {
+            try
+            {
+                StoreOwner storeOwner = new StoreOwner();
+                var client = new HttpClient();
+                client.DefaultRequestHeaders.Clear();
+                UriBuilder builder = new UriBuilder("https://localhost:44303/api/StoreOwner/GetStoreOwnerWithPwd?");
+
+                builder.Query = "userId=" + collection["username"] + "&pwd=" + collection["pwd"];
+                HttpResponseMessage Res = await client.GetAsync(builder.Uri);
+                var storeowner = Res.Content.ReadAsStringAsync().Result;
+                StoreOwner a = JsonConvert.DeserializeObject<StoreOwner>(storeowner);
+                if (Res.IsSuccessStatusCode)
+                {
+                    // Get all stores
+                    StoreDetails storeDetail = new StoreDetails();
+                    var client1 = new HttpClient();
+                    client1.DefaultRequestHeaders.Clear();
+                    UriBuilder builder1 = new UriBuilder("https://localhost:44303/api/Store/GetStoresWithOId?");
+                    StoreOwnerDetails storeOwnerDetails = new StoreOwnerDetails();
+                    builder1.Query = "OwnerId=" + a.OwnerId;  
+                    HttpResponseMessage Res1 = await client1.GetAsync(builder1.Uri);
+                    var stores = Res1.Content.ReadAsStringAsync().Result;
+                    storeOwnerDetails.Store = JsonConvert.DeserializeObject<Store[]>(stores);
+
+                    if (Res1.IsSuccessStatusCode)
+                    {
+                        ViewBag.StoreOwnerName = a.Fname;
+                        
+                    }
+                    ViewBag.StoreOwnerLName = a.Fname;
+
+                    ViewBag.StoreOwner = storeowner;
+                    ViewBag.Error = null;
+                    /*return View("Store", a);*/
+                    return View("Store", storeOwnerDetails);
+                }
+                return View("Store");
+            }
+            catch (Exception e)
+            {
+                return View();
+            }
+        }
         // GET: StoreOwnerController/Create
         public ActionResult Create()
         {

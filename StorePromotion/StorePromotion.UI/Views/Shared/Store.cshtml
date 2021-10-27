@@ -1,5 +1,64 @@
-﻿<div class="container">
-    <h3 class="tittle-w3layouts h2 text-left text-primary pt-3">Welcome </h3>
+﻿@using StorePromotion.Common.Models
+@model StoreOwnerDetails
+@using System.Web.Helpers;
+@using GridMvc;
+<script>
+    function hideme(name) {
+        if (name == 'defaultdiv') {
+            var z = document.getElementById('defaultdiv');
+            z.style.display = "block" ;
+            @*var a = document.getElementById('storeupdate');
+            a.style.display = "none";*@
+            var x = document.getElementById('addstore');
+            x.style.display = "none";
+            var y = document.getElementById('editstore');
+            y.style.display = "none";
+@*            var z = document.getElementById('defaultdiv');
+            z.style.display = "block";
+            var b = document.getElementById('ownerprofile');
+            b.style.display = "none";
+*@        }
+        else if (name == 'addstore') {
+            var z = document.getElementById('defaultdiv');
+            z.style.display = "none";
+@*            var a = document.getElementById('storeupdate');
+            a.style.display = "none";
+*@            var x = document.getElementById('addstore');
+            x.style.display = "block";
+           var y = document.getElementById('editstore');
+            y.style.display = "none";
+@*             var z = document.getElementById('defaultdiv');
+            z.style.display = "none";
+            var b = document.getElementById('ownerprofile');
+            b.style.display = "none";
+*@        }
+        else if (name == 'editstore') {
+            var x = document.getElementById('addstore');
+            x.style.display = "none";
+            var y = document.getElementById('editstore');
+            y.style.display = "block";
+            var z = document.getElementById('defaultdiv');
+            z.style.display = "none";
+            //var b = document.getElementById('ownerprofile');
+            //b.style.display = "none";
+        }
+@*        else if (name == 'ownerprofile') {
+            var a = document.getElementById('storeupdate');
+            a.style.display = "none";
+            var x = document.getElementById('addstore');
+            x.style.display = "none";
+            var y = document.getElementById('editstore');
+            y.style.display = "block";
+            var z = document.getElementById('defaultdiv');
+            z.style.display = "none";
+            var b = document.getElementById('ownerprofile');
+            b.style.display = "none";
+        }
+*@    }
+
+</script>
+<div class="container">
+    <h3 class="tittle-w3layouts h2 text-left text-primary pt-3">Welcome @ViewBag.StoreOwnerLName </h3>
     <div class="inner_sec">
         <div class="row border">
             <div class="col-md-2">
@@ -16,76 +75,279 @@
             </div>
             <div class="col-md-10 border">
                 <h3 class="col-10 col-xl-8 h2 text-left text-primary pt-3"></h3>
-                    <div id="addStore" style="display:none">
-                        <div id="default" style="width:99%;align-self:center;align-content:center">
-                            <form id="frmStore" method="post">
-                                <table width="100%">
-                                    <tr valign="middle">
-                                        <td width="50%">
-                                            <h4>Add Store</h4>
-                                        </td>
-                                        <td width="50%" align="right">
-                                            <button type="button" class="btn btn-primary" onclick="hideme('defaultdiv'); location.reload()">Cancel</button>
-                                            <button type="button" class="btn btn-primary submit mb-4" onclick="PostStore()">Save</button>
-                                        </td>
-                                    </tr>
-                                </table>
-                                <div style="width:90%;align-self:center;align-content:center">
-
-                                    <div class="col-md-6 con-left">
-                                        <div class="form-group" style="text-align:left">
-                                            <label class="my-2">Store Name</label>
-                                            <input type="hidden" name="StoreId" id="StoreId">
-                                            <input class="form-control" type="text" name="StoreName" id="StoreName" placeholder="" required="" style="width:500px;">
-                                        </div>
-                                        <div class="form-group" style="text-align:left">
-                                            <label class="my-2">Address 1</label>
-                                            <input class="form-control" type="text" name="Address1" id="Address1" placeholder="" required="" style="width:500px;">
-                                        </div>
-                                        <div class="form-group" style="text-align:left">
-                                            <label>Address 2 </label>
-                                            <input class="form-control" type="text" name="Address2" id="Address2" placeholder="" required="" style="width:500px;">
-                                        </div>
-
-                                        <div class="form-group" style="text-align:left">
-                                            <select class="form-control" name="CityId" id="CityId">
-
-                                                <option value="x">Select City</option>";
-                                            </select>
+                <div id="defaultdiv" style="width:99%;align-self:center;align-content:center">
+                    <table width="100%">
+                        <tr valign="middle">
+                            <td width="50%">
+                                <h4>Stores</h4>
+                            </td>
+                            <td width="50%" align="right">
+                                <button type="submit" class="btn btn-primary submit mb-4" onclick="hideme('addstore'); populateCity();">Add New</button>
+                            </td>
+                        </tr>
+                    </table>
+                    <div style="width:90%;align-self:center;align-content:center">
+                        <div class="row">
+                            <div class="col-md-10">
+                                <form id="frmProductE" method="post">
+                                    @*<h2>Uploaded File Details</h2>*@
+                                    <div class="form-group">
+                                        <div>
+                                            @if (Model != null)
+                                            {
+                                                @Html.Grid(Model.Store).Named("grdstore").Columns(columns =>
+                                                   {
+                                                   columns.Add(model => model.StoreId).Titled("RecId");
+                                                   columns.Add(model => model.StName).Titled("Name");
+                                                   columns.Add(model => model.Address1).Titled("Address");
+                                                   columns.Add(model => model.Address2).Titled("address");
+                                                   columns.Add(model => model.Qrurl).Titled("Image").Filterable(false).Encoded(false)
+                                               .Sanitized(false)
+                                               .SetWidth(40).RenderValueAs(model => @<img width="75" height="75" alt="Image" src='@Url.Content(model.Qrurl)'>);
+columns.Add()
+.Encoded(false)
+.Sanitized(false)
+.SetWidth(40)
+.RenderValueAs(y => @<img src="~/img/editicon.png" width="20" height="20" onclick="GetStore(@y.StoreId, @y.OwnerId);" />);
+                                                                                                            @*onclick = "GetStore(@o.storeStoreId, @o.OwnerId);"*@
+                                                                                                                                    @*                                        columns.Add()
+                                                                                                .Encoded(false)
+                                                                                                .Sanitized(false)
+                                                                                                .SetWidth(80)
+                                                                                                .RenderValueAs(o => @<img src="~/img/delicon.png" width="20" height="20" onclick="delprod(@o.storeStoreId);" />);
+                                                                                                                                    *@                        })
+                                            }
+                                            else
+                                            {
+                                                <div>
+                                                    No Store available
+                                                </div>
+                                            }
                                             <script>
-                                                function populateCity() {
+                                                function GetStore(storeid, storeownerid) {
+                                                    alert(storeid);
+                                                    alert(storeownerid);
                                                     $.ajax({
-                                                        url: 'https://localhost:44356/api/City/GetCities',
+                                                        url: 'https://localhost:44303/api/Store/GetStore',
                                                         type: 'GET',
+                                                        data: { StoreId: storeid, StoreOwnerId: storeownerid },
                                                         success: function (result) {
-                                                            var markup = "<option value='x'>Select City</option>";
-                                                            var i;
-                                                            for (i = 0; i < result.length; i++) {
-                                                                markup += "<option value=" + JSON.stringify(result[i].CityId) + ">" + JSON.stringify(result[i].CityName) + "</option>";
-                                                            }
-                                                            $("#CityId-").html(markup).show();
-                                                        },
-                                                        error:
-                                                            function (result) {
+                                                            alert('1');
+                                                            var y = document.getElementById('editstore');
+                                                            y.style.display = "block";
+                                                            var z = document.getElementById('defaultdiv');
+                                                            z.style.display = "none";
 
-                                                                alert("error : " + result.responseText);
-                                                            }
-                                                    });
+                                                            $('#StoreIdE').val(result.storeId);
+                                                            $('#StoreNameE').val(result.stName);
+                                                            $('#Address1E').val(result.address1);
+                                                            $('#Address2E').val(result.address2);
+                                                            $('#CityIdE').val(result.cityId);
+                                                            $('#IsActiveE').val(result.isActive);
+                                                            $('#MessageTextE').val(result.messageText);
+@**@                                                        }
+                                                        , error: function (result) {
+                                                            alert("err " + result.responseText);
+                                                        }
+                                                    })
                                                 }
                                             </script>
                                         </div>
-                                        <div class="form-group" style="text-align:left">
-                                            <label class="my-2">MessageText</label>
-                                            <textarea class="form-control" name="MessageText" id="MessageText"></textarea>
-                                        </div>
-                                        <div>
-                                            <input type="hidden" align="right" name="QRURL" id="QRURL">
-                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div id="addstore" style="display:none">
+                    <div id="default" style="width:99%;align-self:center;align-content:center">
+                        <form id="frmStore" method="post">
+                            <table width="100%" borer="1">
+                                <tr valign="top">
+                                    <td width="80%">
+                                        <h4>Add Store</h4>
+                                    </td>
+                                    <td width="10%" align="right">
+                                        <button type="button" class="btn btn-primary" onclick="hideme('defaultdiv'); location.reload()">Cancel</button>
+                                    </td>
+                                    <td width="10%" align="right">
+                                        <button type="button" class="btn btn-primary submit mb-4" onclick="PostStore()">Save</button>
+                                    </td>
+                                </tr>
+                            </table>
+                            <div style="width:90%;align-self:center;align-content:center">
+
+                                <div class="col-md-6 con-left">
+                                    <div class="form-group" style="text-align:left">
+                                        <label class="my-2">Store Name</label>
+                                        <input type="hidden" name="StoreId" id="StoreId">
+                                        <input class="form-control" type="text" name="StoreName" id="StoreName" placeholder="" required="" style="width:500px;">
+                                    </div>
+                                    <div class="form-group" style="text-align:left">
+                                        <label class="my-2">Address 1</label>
+                                        <input class="form-control" type="text" name="Address1" id="Address1" placeholder="" required="" style="width:500px;">
+                                    </div>
+                                    <div class="form-group" style="text-align:left">
+                                        <label>Address 2 </label>
+                                        <input class="form-control" type="text" name="Address2" id="Address2" placeholder="" required="" style="width:500px;">
+                                    </div>
+
+                                    <div class="form-group" style="text-align:left">
+                                        <select class="form-control" name="CityId" id="CityId">
+
+                                            <option value="x">Select City</option>";
+                                        </select>
+                                        <script>
+                                            function populateCity() {
+                                                alert('populate');
+                                                $.ajax({
+                                                    url: 'https://localhost:44303/api/City/GetCities',
+                                                    type: 'GET',
+                                                    success: function (result) {
+                                                        var markup = "<option value='x'>Select City</option>";
+                                                        var i;
+                                                        for (i = 0; i < result.length; i++) {
+                                                            markup += "<option value=" + JSON.stringify(result[i].cityId) + ">" + JSON.stringify(result[i].cityName) + "</option>";
+                                                        }
+                                                        $("#CityId").html(markup).show();
+                                                    },
+                                                    error:
+                                                        function (result) {
+
+                                                            alert("error : " + result.responseText);
+                                                        }
+                                                });
+                                            }
+                                        </script>
+                                    </div>
+                                    <div class="form-group" style="text-align:left">
+                                        <label class="my-2">MessageText</label>
+                                        <textarea class="form-control" name="MessageText" id="MessageText"></textarea>
+                                    </div>
+                                    <div>
+                                        <input type="hidden" align="right" name="QRURL" id="QRURL">
                                     </div>
                                 </div>
+                            </div>
 
-                                <script>
-                                    function PostProduct() {
+                            <script>
+                                    function PostStore() {
+                                        var StName = $('#StoreName').val();
+                                        var Address1 = $('#Address1').val();
+                                        var Address2 = $('#Address2').val();
+                                        var CityId = $('#CityId').val();
+                                        alert(CityId);
+                                        var StateId = CityId;
+                                        var OwnerId = '@ViewBag.OwnerId';
+                                        var MessageText = $('#MessageText').val();
+                                        var IsActive = true;
+                                        var mystore = {
+                                            StName: StName,
+                                            Address1: Address1,
+                                            Address2: Address2,
+                                            CityId: CityId,
+                                            StateId: CityId,
+                                            MessageText: MessageText,
+                                            IsActive: IsActive
+                                        }
+                                        $.ajax({
+                                            url: 'https://localhost:44303/api/Store/PostStore',
+                                        type: 'POST',
+                                            dataType: 'json',
+                                                contentType: 'application/json; charset=utf-8',
+                                                    data: JSON.stringify(mystore)
+                                                        , success: function (result) {
+
+                                                            alert("New Store has been added");
+                                                            $('#StoreId').val(result.StoreId);
+
+                                                        }
+                                                                            , error: function (result) {
+                                            alert("error in Store addition " + result.responseText);
+                                        }
+                                    })
+                                                                    }
+                            </script>
+                        </form>
+                    </div>
+
+                </div>
+
+                <div id="editstore" style="display:none">
+                    <div id="default" style="width:99%;align-self:center;align-content:center">
+                        <form id="frmeditStore" method="post">
+                            <table width="100%" borer="1">
+                                <tr valign="top">
+                                    <td width="80%">
+                                        <h4>Update Store Details</h4>
+                                    </td>
+                                    <td width="10%" align="right">
+                                        <button type="button" class="btn btn-primary" onclick="hideme('editstore'); location.reload()">Cancel</button>
+                                    </td>
+                                    <td width="10%" align="right">
+                                        <button type="button" class="btn btn-primary submit mb-4" onclick="EditStore()">Save</button>
+                                    </td>
+                                </tr>
+                            </table>
+                            <div style="width:90%;align-self:center;align-content:center">
+
+                                <div class="col-md-6 con-left">
+                                    <div class="form-group" style="text-align:left">
+                                        <label class="my-2">Store Name</label>
+                                        <input type="hidden" name="StoreIdE" id="StoreIdE">
+                                        <input class="form-control" type="text" name="StoreNameE" id="StoreNameE" placeholder="" required="" style="width:500px;">
+                                    </div>
+                                    <div class="form-group" style="text-align:left">
+                                        <label class="my-2">Address 1</label>
+                                        <input class="form-control" type="text" name="Address1E" id="Address1E" placeholder="" required="" style="width:500px;">
+                                    </div>
+                                    <div class="form-group" style="text-align:left">
+                                        <label>Address 2 </label>
+                                        <input class="form-control" type="text" name="Address2E" id="Address2E" placeholder="" required="" style="width:500px;">
+                                    </div>
+
+                                    <div class="form-group" style="text-align:left">
+                                        <select class="form-control" name="CityIdE" id="CityIdE">
+                                            <option value="x">Select City</option>";
+                                        </select>
+                                        <script>
+                                            function populateCityE() {
+                                                alert('populate');
+                                                $.ajax({
+                                                    url: 'https://localhost:44303/api/City/GetCities',
+                                                    type: 'GET',
+                                                    success: function (result) {
+                                                        var markup = "<option value='x'>Select City</option>";
+                                                        var i;
+                                                        for (i = 0; i < result.length; i++) {
+                                                            markup += "<option value=" + JSON.stringify(result[i].cityId) + ">" + JSON.stringify(result[i].cityName) + "</option>";
+                                                        }
+                                                        $("#CityIdE").html(markup).show();
+                                                    },
+                                                    error:
+                                                        function (result) {
+
+                                                            alert("error : " + result.responseText);
+                                                        }
+                                                });
+                                            }
+                                        </script>
+                                    </div>
+                                    <div class="form-group" style="text-align:left">
+                                        <label class="my-2">MessageText</label>
+                                        <textarea class="form-control" name="MessageTextE" id="MessageTextE"></textarea>
+                                    </div>
+                                    <div>
+                                        @*                                        <input type="hidden" align="right" name="QRURLE" id="QRURLE">
+                                        *@
+                                    </div>
+                                </div>
+                            </div>
+
+                            <script>
+                                    function EditStore() {
                                         var StName = $('#StoreName').val();
                                         var Address1 = $('#Address1').val();
                                         var Address2 = $('#Address2').val();
@@ -98,8 +360,8 @@
                                             StName: ProductName,
                                             Address1: ShortDescription,
                                             Address2: FullDescription,
-                                            CityId: Price,
-                                            StateId: Discount,
+                                            CityId: CityId,
+                                            StateId: CityId,
                                             MessageText: CategoryId,
                                             IsActive: IsActive
                                         }
@@ -116,19 +378,25 @@
 
                                                         }
                                                                             , error: function (result) {
-                                            alert("error in Product " + result.responseText);
+                                            alert("error in Store addition " + result.responseText);
                                         }
                                     })
                                                                     }
-                                </script>
-                            </form>
-                        </div>
-                        
-                        </div>
+                            </script>
+                        </form>
                     </div>
+
+                </div>
             </div>
+            
+                
+
+
+            
+        </div>
         </div>
     </div>
+</div>
 
 
 

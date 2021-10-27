@@ -42,7 +42,7 @@ namespace StorePromotion.API.Controllers
         // PUT: api/AdminUser/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPut("PutCustomer")]
+        [HttpPut("PutAdminUser")]
         public async Task<IActionResult> PutAdminUser(int id, Customer customer)
         {
             if (id != customer.CustId)

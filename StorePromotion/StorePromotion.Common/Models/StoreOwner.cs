@@ -15,5 +15,6 @@ namespace StorePromotion.Common.Models
         public string UserId { get; set; }
         public string Pwd { get; set; }
         public bool? IsActive { get; set; }
+        public IEnumerable<Store> Store { get; set; }
     }
 }

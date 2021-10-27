@@ -143,7 +143,7 @@ D:\WorkNew\StorePromotion\StorePromotion\StorePromotion.API\obj\Debug\netcoreapp
 D:\WorkNew\StorePromotion\StorePromotion\StorePromotion.API\obj\Debug\netcoreapp3.1\staticwebassets\StorePromotion.API.StaticWebAssets.xml
 D:\WorkNew\StorePromotion\StorePromotion\StorePromotion.API\obj\Debug\netcoreapp3.1\scopedcss\bundle\StorePromotion.API.styles.css
 D:\WorkNew\StorePromotion\StorePromotion\StorePromotion.API\obj\Debug\netcoreapp3.1\StorePromotion.API.RazorTargetAssemblyInfo.cache
-D:\WorkNew\StorePromotion\StorePromotion\StorePromotion.API\obj\Debug\netcoreapp3.1\StorePromotion.API.csproj.CopyComplete
 D:\WorkNew\StorePromotion\StorePromotion\StorePromotion.API\obj\Debug\netcoreapp3.1\StorePromotion.API.dll
 D:\WorkNew\StorePromotion\StorePromotion\StorePromotion.API\obj\Debug\netcoreapp3.1\StorePromotion.API.pdb
 D:\WorkNew\StorePromotion\StorePromotion\StorePromotion.API\obj\Debug\netcoreapp3.1\StorePromotion.API.genruntimeconfig.cache
+D:\WorkNew\StorePromotion\StorePromotion\StorePromotion.API\obj\Debug\netcoreapp3.1\StorePromotion.API.GeneratedMSBuildEditorConfig.editorconfig

@@ -64,7 +64,7 @@
 
     <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModal" aria-hidden="true">
         <div class="modal-dialog" role="document">
-            <form class="contact-form row" method="post" role="form" action="@Url.Action("Create", "StoreOwner")">
+            <form class="contact-form row" method="post" role="form" action="@Url.Action("CheckOwnerLogin", "StoreOwner")">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title">Login</h5>
@@ -97,34 +97,34 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" onclick="CheckLogin();">Login</button>
+                        <button type="submit" class="btn btn-primary">Login</button>
                     </div>
                 </div>
                 <script>
-                                    function CheckLogin() {
-                                        var userId = $('#username').val();
-                                        var pwd = $('#pwd').val();
-                                        alert(userId);
-                                        var mystoreowner = {
-                                            userId: userId,
-                                            pwd: pwd
-                                        }
-                                          $.ajax({
-                                              url: 'https://localhost:44303/api/StoreOwner/GetStoreOwnerWithPwd',
-                                             type: 'GET',
-                                             dataType: 'json',
-                                             contentType: 'application/json; charset=utf-8',
-                                              data: JSON.stringify(mystoreowner)
-                                              , success: function (result) {
-
-                                                  alert("Login");
-
-                                           }
-                                            , error: function (result) {
-                                                $('#lblmessage').val("Invalid UserId or Password");
-                                            }
-                                        })
+                    function CheckLogin() {
+                        var userId1 = $('#username').val();
+                        var pwd1 = $('#pwd').val();
+                        alert(userId1);
+@*                        var mystoreowner = {
+                            userId: userId,
+                            pwd: pwd
+                        }
+*@                   
+                        $.ajax({
+                    url: 'https://localhost:44303/api/StoreOwner/GetStoreOwnerWithPwd',
+                    type: 'GET',
+                    dataType: 'json',
+                    contentType: 'application/json; charset=utf-8',
+                    /*data: JSON.stringify(mystoreowner)*/
+                            data: { userId: userId1, pwd: pwd1 }
+                                , success: function (result) {
+                                    
                                     }
+                                    , error: function (result) {
+                                        $('#lblmessage').val("Invalid UserId or Password");
+                                    }
+                                })
+                    }
                 </script>
 
             </form>

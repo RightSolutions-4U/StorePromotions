@@ -17,5 +17,7 @@ namespace StorePromotion.Common.Models
         public bool? IsActive { get; set; }
         public string Qrurl { get; set; }
         public string MessageText { get; set; }
+
+        /*public IEnumerable<Store> Stores { get; set; }*/
     }
 }
