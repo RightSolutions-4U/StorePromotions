@@ -55,9 +55,10 @@ namespace StorePromotion.UI.Controllers
                     if (Res1.IsSuccessStatusCode)
                     {
                         ViewBag.StoreOwnerName = a.Fname;
-                        
+                        ViewBag.StoreOwnerId = a.OwnerId;
                     }
                     ViewBag.StoreOwnerLName = a.Fname;
+                    ViewBag.StoreOwnerId = a.OwnerId;
 
                     ViewBag.StoreOwner = storeowner;
                     ViewBag.Error = null;

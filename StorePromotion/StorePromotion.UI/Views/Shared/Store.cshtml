@@ -58,7 +58,7 @@
 
 </script>
 <div class="container">
-    <h3 class="tittle-w3layouts h2 text-left text-primary pt-3">Welcome @ViewBag.StoreOwnerLName </h3>
+    <h3 class="tittle-w3layouts h2 text-left text-primary pt-3">Welcome @ViewBag.StoreOwnerLName  @ViewBag.OwnerId </h3>
     <div class="inner_sec">
         <div class="row border">
             <div class="col-md-2">
@@ -125,14 +125,11 @@ columns.Add()
                                             }
                                             <script>
                                                 function GetStore(storeid, storeownerid) {
-                                                    alert(storeid);
-                                                    alert(storeownerid);
                                                     $.ajax({
                                                         url: 'https://localhost:44303/api/Store/GetStore',
                                                         type: 'GET',
                                                         data: { StoreId: storeid, StoreOwnerId: storeownerid },
                                                         success: function (result) {
-                                                            alert('1');
                                                             var y = document.getElementById('editstore');
                                                             y.style.display = "block";
                                                             var z = document.getElementById('defaultdiv');
@@ -201,7 +198,6 @@ columns.Add()
                                         </select>
                                         <script>
                                             function populateCity() {
-                                                alert('populate');
                                                 $.ajax({
                                                     url: 'https://localhost:44303/api/City/GetCities',
                                                     type: 'GET',
@@ -233,14 +229,13 @@ columns.Add()
                             </div>
 
                             <script>
-                                    function PostStore() {
+                                function PostStore() {
                                         var StName = $('#StoreName').val();
                                         var Address1 = $('#Address1').val();
                                         var Address2 = $('#Address2').val();
-                                        var CityId = $('#CityId').val();
-                                        alert(CityId);
-                                        var StateId = CityId;
-                                        var OwnerId = '@ViewBag.OwnerId';
+                                        var CityId = parseInt($('#CityId').val());
+                                        var StateId = $('#CityId').val();
+                                        var OwnerId = parseInt('@ViewBag.StoreOwnerId');
                                         var MessageText = $('#MessageText').val();
                                         var IsActive = true;
                                         var mystore = {
@@ -248,7 +243,8 @@ columns.Add()
                                             Address1: Address1,
                                             Address2: Address2,
                                             CityId: CityId,
-                                            StateId: CityId,
+                                            OwnerId : OwnerId,
+                                            StateId: StateId,
                                             MessageText: MessageText,
                                             IsActive: IsActive
                                         }
@@ -314,7 +310,6 @@ columns.Add()
                                         </select>
                                         <script>
                                             function populateCityE() {
-                                                alert('populate');
                                                 $.ajax({
                                                     url: 'https://localhost:44303/api/City/GetCities',
                                                     type: 'GET',
