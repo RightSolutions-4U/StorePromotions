@@ -108,7 +108,7 @@ columns.Add()
 .Encoded(false)
 .Sanitized(false)
 .SetWidth(40)
-.RenderValueAs(y => @<img src="~/img/editicon.png" width="20" height="20" onclick="GetStore(@y.StoreId, @y.OwnerId);" />);
+.RenderValueAs(y => @<img src="~/img/editicon.png" width="20" height="20" onclick="populateCityE();GetStore(@y.StoreId, @y.OwnerId);" />);
                                                                                                             @*onclick = "GetStore(@o.storeStoreId, @o.OwnerId);"*@
                                                                                                                                     @*                                        columns.Add()
                                                                                                 .Encoded(false)
@@ -140,7 +140,15 @@ columns.Add()
                                                             $('#Address1E').val(result.address1);
                                                             $('#Address2E').val(result.address2);
                                                             $('#CityIdE').val(result.cityId);
-                                                            $('#IsActiveE').val(result.isActive);
+                                                            @*$('#IsActiveE').val(result.isActive);*@
+                                                            if (result.isActive == true) {
+                                                                alert('true');
+                                                                $('#IsActiveE').attr('checked', true);
+                                                            }
+                                                            else {
+                                                                alert('false');
+                                                                $('#IsActiveE').attr('checked', false);
+                                                            }
                                                             $('#MessageTextE').val(result.messageText);
 @**@                                                        }
                                                         , error: function (result) {
@@ -258,6 +266,10 @@ columns.Add()
 
                                                             alert("New Store has been added");
                                                             $('#StoreId').val(result.StoreId);
+                                                            var y = document.getElementById('addstore');
+                                                            y.style.display = "none";
+                                                            var z = document.getElementById('defaultdiv');
+                                                            z.style.display = "block";
 
                                                         }
                                                                             , error: function (result) {
@@ -283,7 +295,7 @@ columns.Add()
                                         <button type="button" class="btn btn-primary" onclick="hideme('editstore'); location.reload()">Cancel</button>
                                     </td>
                                     <td width="10%" align="right">
-                                        <button type="button" class="btn btn-primary submit mb-4" onclick="EditStore()">Save</button>
+                                        <button type="button" class="btn btn-primary submit mb-4" onclick="EditStore();">Save</button>
                                     </td>
                                 </tr>
                             </table>
@@ -334,6 +346,10 @@ columns.Add()
                                         <label class="my-2">MessageText</label>
                                         <textarea class="form-control" name="MessageTextE" id="MessageTextE"></textarea>
                                     </div>
+                                    <div class="form-group" style="text-align:left">
+                                        <label class="my-2">Active</label>
+                                        <input type="checkbox" class="form-control" name="IsActiveE" id="IsActiveE">
+                                    </div>
                                     <div>
                                         @*                                        <input type="hidden" align="right" name="QRURLE" id="QRURLE">
                                         *@
@@ -342,35 +358,40 @@ columns.Add()
                             </div>
 
                             <script>
-                                    function EditStore() {
-                                        var StName = $('#StoreName').val();
-                                        var Address1 = $('#Address1').val();
-                                        var Address2 = $('#Address2').val();
-                                        var CityId = $('#CityId').val();
-                                        var StateId = $('#CityId').val();
-                                        var OwnerId = '@ViewBag.OwnerId';
-                                        var MessageText = $('#MessageText').val();
+                                function EditStore() {
+                                    var StoreId = parseInt($('#StoreIdE').val());
+                                        var StName = $('#StoreNameE').val();
+                                        var Address1 = $('#Address1E').val();
+                                        var Address2 = $('#Address2E').val();
+                                        var CityId = parseInt($('#CityIdE').val());
+                                        var StateId = $('#CityIdE').val();
+                                        var OwnerId = parseInt('@ViewBag.StoreOwnerId');
+                                        var MessageText = $('#MessageTextE').val();
                                         var IsActive = true;
-                                        var mystore = {
-                                            StName: ProductName,
-                                            Address1: ShortDescription,
-                                            Address2: FullDescription,
+                                    var mystore = {
+                                            StoreId: StoreId,
+                                            StName: StName,
+                                            Address1: Address1,
+                                            Address2: Address2,
                                             CityId: CityId,
-                                            StateId: CityId,
-                                            MessageText: CategoryId,
+                                            OwnerId : OwnerId,
+                                            StateId: StateId,
+                                            MessageText: MessageText,
                                             IsActive: IsActive
                                         }
                                         $.ajax({
-                                            url: 'https://localhost:44356/api/Store/PostStore',
-                                        type: 'POST',
+                                            url: 'https://localhost:44303/api/Store/PutStoreEd',
+                                        type: 'PUT',
                                             dataType: 'json',
-                                                contentType: 'application/json; charset=utf-8',
-                                                    data: JSON.stringify(mystore)
+                                            contentType: 'application/json; charset=utf-8',
+                                            data: JSON.stringify(mystore)
                                                         , success: function (result) {
 
-                                                            alert("New Store has been added");
-                                                            $('#StoreId').val(result.StoreId);
-
+                                                            alert("Store details updated");
+                                                            var y = document.getElementById('editstore');
+                                                            y.style.display = "none";
+                                                            var z = document.getElementById('defaultdiv');
+                                                            z.style.display = "block";
                                                         }
                                                                             , error: function (result) {
                                             alert("error in Store addition " + result.responseText);

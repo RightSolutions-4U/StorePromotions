@@ -92,6 +92,21 @@ namespace StorePromotion.API.Controllers
 
             return NoContent();
         }
+        [HttpPut("PutStoreEd")]
+        public async Task<IActionResult> PutStoreEd(Store store)
+        {
+            _context.Entry(store).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+            }
+
+            return NoContent();
+        }
 
         [HttpPost("PostStore")]
         public async Task<ActionResult<Store>> PostStore(Store Store)
