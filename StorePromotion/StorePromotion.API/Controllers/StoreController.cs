@@ -138,7 +138,7 @@ namespace StorePromotion.API.Controllers
                 byte[] byteImage = ms.ToArray();
                 /*bitMap.Save("QRCode.png");*/
                 bitMap.Save(@path, System.Drawing.Imaging.ImageFormat.Png);
-                Store.Qrurl = path;
+                Store.Qrurl = "~/QRCodes/"+ filename;
                 var p1 = await PutStore(Store.StoreId, Store);
                 //_context.Entry(Store).State = EntityState.Modified;
 

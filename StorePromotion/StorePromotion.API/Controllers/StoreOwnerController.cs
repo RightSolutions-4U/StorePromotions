@@ -57,15 +57,15 @@ namespace StorePromotion.API.Controllers
         // PUT: api/AdminUser/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPut("PutAdminUser")]
-        public async Task<IActionResult> PutAdminUser(string id, AdminUser adminUser)
+        [HttpPut("PutStoreOwner")]
+        public async Task<IActionResult> PutStoreOwner(string id, StoreOwner storeOwner)
         {
-            if (id != adminUser.UserId)
+            if (id != storeOwner.UserId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(adminUser).State = EntityState.Modified;
+            _context.Entry(storeOwner).State = EntityState.Modified;
 
             try
             {
@@ -73,14 +73,21 @@ namespace StorePromotion.API.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                //if (!AddressExists(id))
-                //{
-                //    return NotFound();
-                //}
-                //else
-                //{
-                //    throw;
-                //}
+            }
+
+            return NoContent();
+        }
+        [HttpPut("PutStoreOwnerEd")]
+        public async Task<IActionResult> PutStoreOwnerEd(string id, StoreOwner storeOwner)
+        {
+            _context.Entry(storeOwner).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
             }
 
             return NoContent();

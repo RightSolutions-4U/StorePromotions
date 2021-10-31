@@ -18,6 +18,9 @@ namespace StorePromotion.Common.Models
         public string Qrurl { get; set; }
         public string MessageText { get; set; }
 
-        /*public IEnumerable<Store> Stores { get; set; }*/
+        public IEnumerable<Customer> Customer { get; set; }
+        public IEnumerable<Campaign> Campaign { get; set; }
+
+
     }
 }

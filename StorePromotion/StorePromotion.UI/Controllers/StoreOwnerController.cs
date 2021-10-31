@@ -61,6 +61,7 @@ namespace StorePromotion.UI.Controllers
                     ViewBag.StoreOwnerId = a.OwnerId;
 
                     ViewBag.StoreOwner = storeowner;
+                    storeOwnerDetails.StoreOwner = a;
                     ViewBag.Error = null;
                     /*return View("Store", a);*/
                     return View("Store", storeOwnerDetails);

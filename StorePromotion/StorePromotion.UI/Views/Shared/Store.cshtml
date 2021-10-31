@@ -2,63 +2,59 @@
 @model StoreOwnerDetails
 @using System.Web.Helpers;
 @using GridMvc;
+@{
+    var storeowner = ViewBag.StoreOwner;
+}
+
 <script>
     function hideme(name) {
-        if (name == 'defaultdiv') {
-            var z = document.getElementById('defaultdiv');
-            z.style.display = "block" ;
-            @*var a = document.getElementById('storeupdate');
-            a.style.display = "none";*@
-            var x = document.getElementById('addstore');
-            x.style.display = "none";
-            var y = document.getElementById('editstore');
-            y.style.display = "none";
-@*            var z = document.getElementById('defaultdiv');
-            z.style.display = "block";
-            var b = document.getElementById('ownerprofile');
-            b.style.display = "none";
-*@        }
-        else if (name == 'addstore') {
-            var z = document.getElementById('defaultdiv');
-            z.style.display = "none";
-@*            var a = document.getElementById('storeupdate');
-            a.style.display = "none";
-*@            var x = document.getElementById('addstore');
-            x.style.display = "block";
-           var y = document.getElementById('editstore');
-            y.style.display = "none";
-@*             var z = document.getElementById('defaultdiv');
-            z.style.display = "none";
-            var b = document.getElementById('ownerprofile');
-            b.style.display = "none";
-*@        }
-        else if (name == 'editstore') {
-            var x = document.getElementById('addstore');
-            x.style.display = "none";
-            var y = document.getElementById('editstore');
-            y.style.display = "block";
-            var z = document.getElementById('defaultdiv');
-            z.style.display = "none";
-            //var b = document.getElementById('ownerprofile');
-            //b.style.display = "none";
+		if (name == 'defaultdiv') {
+			var z = document.getElementById('defaultdiv');
+			z.style.display = "block" ;
+			@*var a = document.getElementById('storeupdate');
+			a.style.display = "none";*@
+			var x = document.getElementById('addstore');
+			x.style.display = "none";
+			var y = document.getElementById('editstore');
+			y.style.display = "none";
+    		var b = document.getElementById('ownerprofile');
+			b.style.display = "none";
         }
-@*        else if (name == 'ownerprofile') {
-            var a = document.getElementById('storeupdate');
-            a.style.display = "none";
+		else if (name == 'addstore') {
+			var z = document.getElementById('defaultdiv');
+			z.style.display = "none";
             var x = document.getElementById('addstore');
-            x.style.display = "none";
-            var y = document.getElementById('editstore');
-            y.style.display = "block";
-            var z = document.getElementById('defaultdiv');
-            z.style.display = "none";
-            var b = document.getElementById('ownerprofile');
-            b.style.display = "none";
+			x.style.display = "block";
+		   var y = document.getElementById('editstore');
+			y.style.display = "none";
+			var b = document.getElementById('ownerprofile');
+			b.style.display = "none";
         }
-*@    }
+		else if (name == 'editstore') {
+			var x = document.getElementById('addstore');
+			x.style.display = "none";
+			var y = document.getElementById('editstore');
+			y.style.display = "block";
+			var z = document.getElementById('defaultdiv');
+			z.style.display = "none";
+			var b = document.getElementById('ownerprofile');
+			b.style.display = "none";
+		}
+		else if (name == 'ownerprofile') {
+			var x = document.getElementById('addstore');
+			x.style.display = "none";
+			var y = document.getElementById('editstore');
+			y.style.display = "none";
+			var z = document.getElementById('defaultdiv');
+			z.style.display = "none";
+			var b = document.getElementById('ownerprofile');
+			b.style.display = "block";
+		}
+	}
 
 </script>
 <div class="container">
-    <h3 class="tittle-w3layouts h2 text-left text-primary pt-3">Welcome @ViewBag.StoreOwnerLName  @ViewBag.OwnerId </h3>
+    <h3 class="tittle-w3layouts h2 text-left text-primary pt-3">Welcome @ViewBag.StoreOwnerLName  </h3>
     <div class="inner_sec">
         <div class="row border">
             <div class="col-md-2">
@@ -66,9 +62,9 @@
                     <div class="sidebar-heading border-bottom bg-light"></div>
                     <div class="list-group list-group-flush">
                         <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Stores</a>
-                        <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Edit Profile</a>
+                        <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!" onclick="hideme('ownerprofile');">Edit Profile</a>
                         <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Change Password</a>
-                        <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Send Campaign</a>
+                        <a class="list-group-item list-group-item-action list-group-item-light p-3" href="@Url.Action("Index", "Promotions",new { OwnerId = @ViewBag.StoreOwnerId})">Promotions</a>
                     </div>
                 </div>
 
@@ -109,13 +105,12 @@ columns.Add()
 .Sanitized(false)
 .SetWidth(40)
 .RenderValueAs(y => @<img src="~/img/editicon.png" width="20" height="20" onclick="populateCityE();GetStore(@y.StoreId, @y.OwnerId);" />);
-                                                                                                            @*onclick = "GetStore(@o.storeStoreId, @o.OwnerId);"*@
-                                                                                                                                    @*                                        columns.Add()
-                                                                                                .Encoded(false)
-                                                                                                .Sanitized(false)
-                                                                                                .SetWidth(80)
-                                                                                                .RenderValueAs(o => @<img src="~/img/delicon.png" width="20" height="20" onclick="delprod(@o.storeStoreId);" />);
-                                                                                                                                    *@                        })
+columns.Add()
+.Encoded(false)
+.Sanitized(false)
+.SetWidth(40)
+.RenderValueAs(y => @<img src="~/img/print.jpg" id="printimage" width="20" height="20" onclick="PrintStore(@y.Qrurl, @y.MessageText);"  data-qrurl="@y.Qrurl" data-messagetext="@y.MessageText"  data-toggle="modal" data-target="#PrintModal"  />);
+                                                   })
                                             }
                                             else
                                             {
@@ -124,38 +119,36 @@ columns.Add()
                                                 </div>
                                             }
                                             <script>
-                                                function GetStore(storeid, storeownerid) {
-                                                    $.ajax({
-                                                        url: 'https://localhost:44303/api/Store/GetStore',
-                                                        type: 'GET',
-                                                        data: { StoreId: storeid, StoreOwnerId: storeownerid },
-                                                        success: function (result) {
-                                                            var y = document.getElementById('editstore');
-                                                            y.style.display = "block";
-                                                            var z = document.getElementById('defaultdiv');
-                                                            z.style.display = "none";
+												function GetStore(storeid, storeownerid) {
+													$.ajax({
+														url: 'https://localhost:44303/api/Store/GetStore',
+														type: 'GET',
+														data: { StoreId: storeid, StoreOwnerId: storeownerid },
+														success: function (result) {
+															var y = document.getElementById('editstore');
+															y.style.display = "block";
+															var z = document.getElementById('defaultdiv');
+															z.style.display = "none";
 
-                                                            $('#StoreIdE').val(result.storeId);
-                                                            $('#StoreNameE').val(result.stName);
-                                                            $('#Address1E').val(result.address1);
-                                                            $('#Address2E').val(result.address2);
-                                                            $('#CityIdE').val(result.cityId);
-                                                            @*$('#IsActiveE').val(result.isActive);*@
-                                                            if (result.isActive == true) {
-                                                                alert('true');
-                                                                $('#IsActiveE').attr('checked', true);
-                                                            }
-                                                            else {
-                                                                alert('false');
-                                                                $('#IsActiveE').attr('checked', false);
-                                                            }
-                                                            $('#MessageTextE').val(result.messageText);
+															$('#StoreIdE').val(result.storeId);
+															$('#StoreNameE').val(result.stName);
+															$('#Address1E').val(result.address1);
+															$('#Address2E').val(result.address2);
+															$('#CityIdE').val(result.cityId);
+															@*$('#IsActiveE').val(result.isActive);*@
+															if (result.isActive == true) {
+																$('#IsActiveE').attr('checked', true);
+															}
+															else {
+																$('#IsActiveE').attr('checked', false);
+															}
+															$('#MessageTextE').val(result.messageText);
 @**@                                                        }
-                                                        , error: function (result) {
-                                                            alert("err " + result.responseText);
-                                                        }
-                                                    })
-                                                }
+														, error: function (result) {
+															alert("err " + result.responseText);
+														}
+													})
+												}
                                             </script>
                                         </div>
                                     </div>
@@ -165,6 +158,47 @@ columns.Add()
                     </div>
 
                 </div>
+                <!--Print Form-->
+                <script type="text/javascript">
+                    $("#printimage").click(function PrintStore(src1, msg1) {
+                        var imgsrc = $(this).data('qrurl');
+                        alert(root);
+                        @*$("#QRImage").attr("src", "~/QRCodes/QRCode17.png");*@
+                        $("#QRImage").prop("src", imgsrc);
+                        
+                        var msg1 = $(this).data('messagetext');
+                        $("#txtMessage").html(msg1);
+                    });
+                </script>
+                <div class="modal fade" id="PrintModal" tabindex="-1" role="dialog" aria-labelledby="loginModal" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Print your QRCode and Message</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+
+                                <div class="modal-body">
+                                    <div class="col-lg-12 mb-4">
+                                        <div class="form-floating">
+                                           <img name="QRImage" id="QRImage" src="~/QRCodes/QRCode17.png" width="50" height="50" />                                            
+                                            <hr />
+                                           <textarea name="txtMessage" id="txtMessage"></textarea>
+                                        </div>
+                                    </div><!-- End Input Name -->
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary" onclick="window.print();">Print</button>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+                <!--End print -->
+
+
 
                 <div id="addstore" style="display:none">
                     <div id="default" style="width:99%;align-self:center;align-content:center">
@@ -237,52 +271,156 @@ columns.Add()
                             </div>
 
                             <script>
-                                function PostStore() {
-                                        var StName = $('#StoreName').val();
-                                        var Address1 = $('#Address1').val();
-                                        var Address2 = $('#Address2').val();
-                                        var CityId = parseInt($('#CityId').val());
-                                        var StateId = $('#CityId').val();
-                                        var OwnerId = parseInt('@ViewBag.StoreOwnerId');
-                                        var MessageText = $('#MessageText').val();
-                                        var IsActive = true;
-                                        var mystore = {
-                                            StName: StName,
-                                            Address1: Address1,
-                                            Address2: Address2,
-                                            CityId: CityId,
-                                            OwnerId : OwnerId,
-                                            StateId: StateId,
-                                            MessageText: MessageText,
-                                            IsActive: IsActive
-                                        }
-                                        $.ajax({
-                                            url: 'https://localhost:44303/api/Store/PostStore',
-                                        type: 'POST',
-                                            dataType: 'json',
-                                                contentType: 'application/json; charset=utf-8',
-                                                    data: JSON.stringify(mystore)
-                                                        , success: function (result) {
+								function PostStore() {
+										var StName = $('#StoreName').val();
+										var Address1 = $('#Address1').val();
+										var Address2 = $('#Address2').val();
+										var CityId = parseInt($('#CityId').val());
+										var StateId = $('#CityId').val();
+										var OwnerId = parseInt('@ViewBag.StoreOwnerId');
+										var MessageText = $('#MessageText').val();
+										var IsActive = true;
+										var mystore = {
+											StName: StName,
+											Address1: Address1,
+											Address2: Address2,
+											CityId: CityId,
+											OwnerId : OwnerId,
+											StateId: StateId,
+											MessageText: MessageText,
+											IsActive: IsActive
+										}
+										$.ajax({
+											url: 'https://localhost:44303/api/Store/PostStore',
+										type: 'POST',
+											dataType: 'json',
+												contentType: 'application/json; charset=utf-8',
+													data: JSON.stringify(mystore)
+														, success: function (result) {
 
-                                                            alert("New Store has been added");
-                                                            $('#StoreId').val(result.StoreId);
-                                                            var y = document.getElementById('addstore');
-                                                            y.style.display = "none";
-                                                            var z = document.getElementById('defaultdiv');
-                                                            z.style.display = "block";
+															alert("New Store has been added");
+															$('#StoreId').val(result.StoreId);
+															var y = document.getElementById('addstore');
+															y.style.display = "none";
+															var z = document.getElementById('defaultdiv');
+															z.style.display = "block";
 
-                                                        }
-                                                                            , error: function (result) {
-                                            alert("error in Store addition " + result.responseText);
-                                        }
-                                    })
-                                                                    }
+														}
+																			, error: function (result) {
+											alert("error in Store addition " + result.responseText);
+										}
+									})
+																	}
                             </script>
                         </form>
                     </div>
 
                 </div>
 
+                <div id="ownerprofile" style="display:none">
+                    <div id="default" style="width:99%;align-self:center;align-content:center">
+                        <form id="frmeditProfile" method="post">
+                            <table width="100%" borer="1">
+                                <tr valign="top">
+                                    <td width="80%">
+                                        <h4>Update Owner Details</h4>
+                                    </td>
+                                    <td width="10%" align="right">
+                                        <button type="button" class="btn btn-primary" onclick="hideme('ownerprofile'); location.reload()">Cancel</button>
+                                    </td>
+                                    <td width="10%" align="right">
+                                        <button type="button" class="btn btn-primary submit mb-4" onclick="EditStoreOwner();">Save</button>
+                                    </td>
+                                </tr>
+                            </table>
+                            <div style="width:90%;align-self:center;align-content:center">
+
+                                <div class="col-md-6 con-left">
+                                    <div class="form-group" style="text-align:left">
+                                        <label class="my-2">First Name</label>
+                                        <input type="hidden" name="OwnerIdE" id="OwnerIdE" value="@Model.StoreOwner.OwnerId">
+                                        <input class="form-control" type="text" name="FNameE" id="FNameE" placeholder="" required="" style="width:500px;" value="@Model.StoreOwner.Fname">
+                                    </div>
+                                    <div class="form-group" style="text-align:left">
+                                        <label class="my-2">Last Name</label>
+                                        <input class="form-control" type="text" name="LNameE" id="LNameE" placeholder="" required="" style="width:500px;" value="@Model.StoreOwner.Lname">
+                                    </div>
+                                    <div class="form-group" style="text-align:left">
+                                        <label>Cell No. </label>
+                                        <input class="form-control" type="text" name="CellNoE" id="CellNoE" placeholder="" required="" style="width:500px;" value="@Model.StoreOwner.CellNo">
+                                    </div>
+                                    <div class="form-group" style="text-align:left">
+                                        <label>Email </label>
+                                        <input class="form-control" type="text" name="EmailE" id="EmailE" placeholder="" required="" style="width:500px;" value="@Model.StoreOwner.Email">
+                                    </div>
+                                    <div class="form-group" style="text-align:left">
+                                        <label>UserId </label>
+                                        <input class="form-control" type="text" name="UserIdE" id="UserIdE" placeholder="" required="" style="width:500px;" value="@Model.StoreOwner.UserId">
+                                    </div>
+                                    <div class="form-group" style="text-align:left">
+                                        <label class="my-2">Active</label>
+                                        @if (Model.StoreOwner.IsActive == true)
+                                        {
+                                            <input type="checkbox" class="form-control" name="IsActiveE" id="IsActiveE" checked="checked">
+                                        }
+                                        else
+                                        {
+                                            <input type="checkbox" class="form-control" name="IsActiveE" id="IsActiveE">
+                                        }
+                                    </div>
+                                    <div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <script>
+								function EditStoreOwner() {
+									var Id = parseInt('@ViewBag.StoreOwnerId');
+                                    var FName = $('#FNameE').val();
+                                    var LName = $('#LNameE').val();
+                                    var CellNo = $('#CellNoE').val();
+                                    var Email = $('#EmailE').val();
+									var StoreOwnerId = parseInt('@ViewBag.StoreOwnerId');
+                                    var UserId = $('#UserIdE').val();
+                                    var IsActive = true;
+                                    var PWD = '@Model.StoreOwner.Pwd';
+									var mystore = {
+                                            id: Id,
+                                            CellNo: CellNo,
+                                            FName: FName,
+                                            LName: LName,
+                                            Email: Email,
+                                            CityId: CityId,
+                                            OwnerId: StoreOwnerId,
+                                            UserId: UserId,
+                                        IsActive: IsActive,
+                                        Pwd: PWD
+										}
+										$.ajax({
+                                            url: 'https://localhost:44303/api/StoreOwner/PutStoreOwnerEd',
+										type: 'PUT',
+											dataType: 'json',
+											contentType: 'application/json; charset=utf-8',
+											data: JSON.stringify(mystore)
+														, success: function (result) {
+
+															alert("Store Owner details updated");
+                                                            var y = document.getElementById('ownerprofile');
+															y.style.display = "none";
+															var z = document.getElementById('defaultdiv');
+															z.style.display = "block";
+														}
+														, error: function (result) {
+											                alert("error in Store owner update " + result.responseText);
+    										}
+									})
+									}
+                            </script>
+                        </form>
+                    </div>
+
+                </div>
+                <!--Edit Profile-->
                 <div id="editstore" style="display:none">
                     <div id="default" style="width:99%;align-self:center;align-content:center">
                         <form id="frmeditStore" method="post">
@@ -358,61 +496,62 @@ columns.Add()
                             </div>
 
                             <script>
-                                function EditStore() {
-                                    var StoreId = parseInt($('#StoreIdE').val());
-                                        var StName = $('#StoreNameE').val();
-                                        var Address1 = $('#Address1E').val();
-                                        var Address2 = $('#Address2E').val();
-                                        var CityId = parseInt($('#CityIdE').val());
-                                        var StateId = $('#CityIdE').val();
-                                        var OwnerId = parseInt('@ViewBag.StoreOwnerId');
-                                        var MessageText = $('#MessageTextE').val();
-                                        var IsActive = true;
-                                    var mystore = {
-                                            StoreId: StoreId,
-                                            StName: StName,
-                                            Address1: Address1,
-                                            Address2: Address2,
-                                            CityId: CityId,
-                                            OwnerId : OwnerId,
-                                            StateId: StateId,
-                                            MessageText: MessageText,
-                                            IsActive: IsActive
-                                        }
-                                        $.ajax({
-                                            url: 'https://localhost:44303/api/Store/PutStoreEd',
-                                        type: 'PUT',
-                                            dataType: 'json',
-                                            contentType: 'application/json; charset=utf-8',
-                                            data: JSON.stringify(mystore)
-                                                        , success: function (result) {
+								function EditStore() {
+									var StoreId = parseInt($('#StoreIdE').val());
+										var StName = $('#StoreNameE').val();
+										var Address1 = $('#Address1E').val();
+										var Address2 = $('#Address2E').val();
+										var CityId = parseInt($('#CityIdE').val());
+										var StateId = $('#CityIdE').val();
+										var OwnerId = parseInt('@ViewBag.StoreOwnerId');
+										var MessageText = $('#MessageTextE').val();
+										var IsActive = true;
+									var mystore = {
+											StoreId: StoreId,
+											StName: StName,
+											Address1: Address1,
+											Address2: Address2,
+											CityId: CityId,
+											OwnerId : OwnerId,
+											StateId: StateId,
+											MessageText: MessageText,
+											IsActive: IsActive
+										}
+										$.ajax({
+											url: 'https://localhost:44303/api/Store/PutStoreEd',
+										type: 'PUT',
+											dataType: 'json',
+											contentType: 'application/json; charset=utf-8',
+											data: JSON.stringify(mystore)
+														, success: function (result) {
 
-                                                            alert("Store details updated");
-                                                            var y = document.getElementById('editstore');
-                                                            y.style.display = "none";
-                                                            var z = document.getElementById('defaultdiv');
-                                                            z.style.display = "block";
-                                                        }
-                                                                            , error: function (result) {
-                                            alert("error in Store addition " + result.responseText);
-                                        }
-                                    })
-                                                                    }
+															alert("Store details updated");
+															var y = document.getElementById('editstore');
+															y.style.display = "none";
+															var z = document.getElementById('defaultdiv');
+															z.style.display = "block";
+														}
+																			, error: function (result) {
+											alert("error in Store addition " + result.responseText);
+										}
+									})
+																	}
                             </script>
                         </form>
                     </div>
 
                 </div>
+                <!--Edit Profile-->
             </div>
-            
-                
 
 
-            
-        </div>
+
+
+
         </div>
     </div>
 </div>
+@*</div>*@
 
 
 

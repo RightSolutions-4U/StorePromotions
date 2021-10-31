@@ -10,6 +10,7 @@ namespace StorePromotion.Common.Models
     {
         [Key]
         public int StoreOwnerId { get; set; }
+        public StoreOwner StoreOwner { get; set; }
         public IEnumerable<Store> Store { get; set; }
     }
 }

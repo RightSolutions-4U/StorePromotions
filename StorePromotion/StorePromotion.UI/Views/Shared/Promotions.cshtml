@@ -1,0 +1,67 @@
+﻿@using StorePromotion.Common.Models
+@model Store[]
+@using System.Web.Helpers;
+@using GridMvc;
+
+
+<div class="container">
+    <h3 class="tittle-w3layouts h2 text-left text-primary pt-3">Welcome </h3>
+    <div class="inner_sec">
+        <div class="row border">
+            <div class="col-md-12 border">
+                <div col-md-4>Select Store</div>
+                <div col-md-4>
+                    <select class="form-control" name="StoreId" id="StoreId">
+                        <option value="x">Select Store</option>;
+                        @foreach (var store in Model)
+                        {
+                            <option value="@store.StoreId" onclick="GetCustomers();">@store.StName</option>
+                        }
+                    </select>
+                    <script>
+                        function GetCustomers() {
+                            $.ajax({
+                                url: 'https://localhost:44303/api/Store/GetStore',
+                                type: 'GET',
+                                data: { StoreId: storeid, StoreOwnerId: storeownerid },
+                                success: function (result) {
+                                    var y = document.getElementById('editstore');
+                                    y.style.display = "block";
+                                    var z = document.getElementById('defaultdiv');
+                                    z.style.display = "none";
+
+                                    $('#StoreIdE').val(result.storeId);
+                                    $('#StoreNameE').val(result.stName);
+                                    $('#Address1E').val(result.address1);
+                                    $('#Address2E').val(result.address2);
+                                    $('#CityIdE').val(result.cityId);
+                                        @* $('#IsActiveE').val(result.isActive);*@
+                                    if (result.isActive == true) {
+                                        $('#IsActiveE').attr('checked', true);
+                                    }
+                                    else {
+                                        $('#IsActiveE').attr('checked', false);
+                                    }
+                                    $('#MessageTextE').val(result.messageText);
+                                        @**@                                                        }
+                                , error: function (result) {
+                                    alert("err " + result.responseText);
+                                }
+                            })
+                        }
+                    </script>
+                </div>
+            </div>
+            <div class="col-md-12 border">
+                <div col-md-4 id="grdCustomers">
+                    @*Grid*@
+
+                </div>
+                <div col-md-4 id="grdCampaign">
+                    @*Campaign*@
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
