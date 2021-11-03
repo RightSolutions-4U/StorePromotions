@@ -34,10 +34,15 @@ namespace StorePromotion.API.Controllers
 
         // GET: api/AdminUser/5
         [HttpGet("GetStore")]
-        public async Task<ActionResult<Store>> GetStore(int StoreId, int StoreOwnerId)
+        public async Task<ActionResult<IEnumerable<Store>>> GetStore(int StoreId)
         {
-            var store = await _context.Stores.FindAsync(StoreId,StoreOwnerId);
-            /*var store =  _context.Stores.Where(e => e.StoreId == StoreId);*/
+            //var store = await _context.Stores.FindAsync(StoreId)
+            //    .include
+            //    ;
+            var store = await _context.Stores.Where(e => e.StoreId == StoreId)
+                .Include(e => e.Customer)
+                .Include(e => e.Campaign)
+                .ToListAsync();
             if (store == null)
             {
                 return NotFound();
@@ -52,6 +57,8 @@ namespace StorePromotion.API.Controllers
             try
             {
                 var store = await _context.Stores.Where(a => a.OwnerId == OwnerId)
+                    .Include(a => a.Customer)
+                    .Include(a => a.Campaign)
                     .ToListAsync();
                 return store;
             }

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "tqy94bgzQaJ+J0ZdkrXAIaPmea8+uXQy9frbU+XZKNVd/jrSizvJ2wHnVqN2iju1kiMcpzNVK3DSMfchsniDRA==",
+  "dgSpecHash": "RCFudxub1Y8CMh2ji/CEJiFDyLsHHiyBSomno66G/v3BtAMEVn4L3mrHTcCcKQ66IR04cmVkQP03u8hVI89lPQ==",
   "success": true,
   "projectFilePath": "D:\\WorkNew\\StorePromotion\\StorePromotion\\StorePromotion.UI\\StorePromotion.UI.csproj",
   "expectedPackageFiles": [
@@ -179,6 +179,7 @@
     "C:\\Users\\infod\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512",
     "C:\\Users\\infod\\.nuget\\packages\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512",
     "C:\\Users\\infod\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512",
+    "C:\\Users\\infod\\.nuget\\packages\\twilio\\5.67.0\\twilio.5.67.0.nupkg.sha512",
     "C:\\Users\\infod\\.nuget\\packages\\webgridmvc\\1.0.0\\webgridmvc.1.0.0.nupkg.sha512"
   ],
   "logs": [

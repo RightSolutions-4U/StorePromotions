@@ -9,7 +9,7 @@ namespace StorePromotion.Common.Models
     {
         public int CampaignId { get; set; }
         public int StoreId { get; set; }
-        public int? Message { get; set; }
+        public string Message { get; set; }
         public DateTime? Cdate { get; set; }
         public bool? IsActive { get; set; }
         public DateTime? SentDate { get; set; }

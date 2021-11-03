@@ -39,6 +39,8 @@
           "Microsoft.EntityFrameworkCore.SqlServer": "5.0.10",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "3.1.5",
           "StorePromotion.Common": "1.0.0",
+          "Twilio": "5.67.0",
+          "WebGridMvc": "1.0.0",
           "Microsoft.AspNetCore.Antiforgery": "3.1.0.0",
           "Microsoft.AspNetCore.Authentication.Abstractions": "3.1.0.0",
           "Microsoft.AspNetCore.Authentication.Cookies": "3.1.0.0",
@@ -2390,6 +2392,34 @@
           "System.Threading": "4.3.0",
           "System.Xml.ReaderWriter": "4.3.0",
           "System.Xml.XmlDocument": "4.3.0"
+        }
+      },
+      "Twilio/5.67.0": {
+        "dependencies": {
+          "Microsoft.IdentityModel.Tokens": "5.6.0",
+          "Newtonsoft.Json": "11.0.2",
+          "System.Collections.Specialized": "4.3.0",
+          "System.IdentityModel.Tokens.Jwt": "5.6.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Twilio.dll": {
+            "assemblyVersion": "5.67.0.0",
+            "fileVersion": "5.67.0.0"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.0/Twilio.dll": {}
+        }
+      },
+      "WebGridMvc/1.0.0": {
+        "runtime": {
+          "lib/net40/WebGridMvc.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        },
+        "compile": {
+          "lib/net40/WebGridMvc.dll": {}
         }
       },
       "StorePromotion.Common/1.0.0": {
@@ -5257,6 +5287,20 @@
       "sha512": "sha512-MYoTCP7EZ98RrANESW05J5ZwskKDoN0AuZ06ZflnowE50LTpbR5yRg3tHckTVm5j/m47stuGgCrCHWePyHS70Q==",
       "path": "system.xml.xmlserializer/4.3.0",
       "hashPath": "system.xml.xmlserializer.4.3.0.nupkg.sha512"
+    },
+    "Twilio/5.67.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Oko4GNZhDxitnaPLZpR/YEbVEaegdZNim0I+GTrhpPiPMkR5ahxc1H3jkIyICpN3M3VkFp2ECQXezDAbTM0rAw==",
+      "path": "twilio/5.67.0",
+      "hashPath": "twilio.5.67.0.nupkg.sha512"
+    },
+    "WebGridMvc/1.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-AC2gajOm8KFFzU3OSFmRvaatJycosjcgTUek8toN04tmTVFSYDiHZT4cDSz/XL7JPGIiWd25kY5iGlG1LsdGpw==",
+      "path": "webgridmvc/1.0.0",
+      "hashPath": "webgridmvc.1.0.0.nupkg.sha512"
     },
     "StorePromotion.Common/1.0.0": {
       "type": "project",

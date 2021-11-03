@@ -7,6 +7,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Net.Http;
 using Newtonsoft.Json;
+using Twilio;
+using Twilio.Rest.Api.V2010.Account;
+using Twilio.Types;
 
 namespace StorePromotion.UI.Controllers
 {
@@ -57,14 +60,53 @@ namespace StorePromotion.UI.Controllers
 
         // POST: PromotionsController/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+/*        [ValidateAntiForgeryToken]*/
+        public async Task<ActionResult> Create(IFormCollection collection)
         {
             try
             {
+
+                var Message = collection["txtMessag"];
+            var StoreId = collection["StoreId1"];
+            /*Customer customers = new Customer();*/
+            var client = new HttpClient();
+            client.DefaultRequestHeaders.Clear();
+            UriBuilder builder = new UriBuilder("https://localhost:44303/api/Customer/GetCustomerWithStoreId?");
+
+            builder.Query = "storeid=" + StoreId;
+            HttpResponseMessage Res = await client.GetAsync(builder.Uri);
+            var customers = Res.Content.ReadAsStringAsync().Result;
+            Customer[] a = JsonConvert.DeserializeObject<Customer[]>(customers);
+            if (Res.IsSuccessStatusCode)
+            {
+                    var accountSid = "";
+                    var authToken = "";
+                    TwilioClient.Init(accountSid, authToken);
+                    /*var to = new PhoneNumber("+923354883191");*/
+                    var to = new PhoneNumber("+12057459526");
+                    /*var from = new PhoneNumber("+17162192114");*/
+                    var from = new PhoneNumber("+17074523398");
+
+                   /* var message = MessageResource.Create(
+                        to: to,
+                        from: from,
+                        body: "Sending SMS to shazia from twilio test Account"
+                        );*/
+                    /*return Content(message.Sid);*/
+                    foreach (var c in a)
+                    {
+                        var message = MessageResource.Create(
+                        to: to,
+                        from: from,
+                        body: "Sending SMS to shazia from twilio test Account"
+                        );
+                    }
+            }
+
+
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch(Exception e)
             {
                 return View();
             }

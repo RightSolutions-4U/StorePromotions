@@ -9,59 +9,90 @@
     <div class="inner_sec">
         <div class="row border">
             <div class="col-md-12 border">
-                <div col-md-4>Select Store</div>
-                <div col-md-4>
-                    <select class="form-control" name="StoreId" id="StoreId">
-                        <option value="x">Select Store</option>;
-                        @foreach (var store in Model)
-                        {
-                            <option value="@store.StoreId" onclick="GetCustomers();">@store.StName</option>
-                        }
-                    </select>
+                <div class="col-md-4">Select Store</div>
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
                     <script>
                         function GetCustomers() {
+                            var storeid = $('#StoreId').val();
+                            @*$("#StoreId1").val() = storeid;*@
+                            var textcontrol = document.getElementById("StoreId1");
+                            textcontrol.value = storeid;
                             $.ajax({
-                                url: 'https://localhost:44303/api/Store/GetStore',
+                                url: 'https://localhost:44303/api/Customer/GetCustomerWithStoreId',
                                 type: 'GET',
-                                data: { StoreId: storeid, StoreOwnerId: storeownerid },
+                                data: { storeid: storeid },
                                 success: function (result) {
-                                    var y = document.getElementById('editstore');
-                                    y.style.display = "block";
-                                    var z = document.getElementById('defaultdiv');
-                                    z.style.display = "none";
-
-                                    $('#StoreIdE').val(result.storeId);
-                                    $('#StoreNameE').val(result.stName);
-                                    $('#Address1E').val(result.address1);
-                                    $('#Address2E').val(result.address2);
-                                    $('#CityIdE').val(result.cityId);
-                                        @* $('#IsActiveE').val(result.isActive);*@
-                                    if (result.isActive == true) {
-                                        $('#IsActiveE').attr('checked', true);
-                                    }
-                                    else {
-                                        $('#IsActiveE').attr('checked', false);
-                                    }
-                                    $('#MessageTextE').val(result.messageText);
-                                        @**@                                                        }
+                                    
+                                    
+                                    var tableCamp = $('#dtVerticalScrollExample tbody');
+                                    $.each(result, function (i, item) {
+                                        tableCamp.append('<tr><td align="center">' + item.cellNo + '</td></tr>');
+                                    })
+                                }
                                 , error: function (result) {
                                     alert("err " + result.responseText);
                                 }
                             })
                         }
                     </script>
+                    <select class="form-control" name="StoreId" id="StoreId" onchange="GetCustomers();">
+                        <option value="x">Select Store</option>;
+                        @foreach (var store in Model)
+                        {
+                            <option value="@store.StoreId" >@store.StName</option>
+                        }
+                    </select>
+                    
                 </div>
             </div>
             <div class="col-md-12 border">
-                <div col-md-4 id="grdCustomers">
+                <div class="col-md-4" id="grdCustomers">
                     @*Grid*@
-
+                    <!--Table for customers-->
+                    <table id="dtVerticalScrollExample" class="table table-striped table-bordered table-sm" cellspacing="0"
+                           width="100%">
+                        <thead>
+                            <tr>
+                                <th class="th-sm">
+                                    Customers
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>&nbsp;</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>
+                                    Customers
+                                </th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                    <!--Table for customers-->
                 </div>
-                <div col-md-4 id="grdCampaign">
-                    @*Campaign*@
-
+                <div class="col-md-6" id="grdCampaign">
+                    <form id="frmsend" method="post" action="@Url.Action("Create","Promotions")">
+                        <input type="text" id="StoreId1" name="StoreId1" />
+                        <textarea id="txtMessag" name="txtMessag">
+                        
+                        </textarea>
+                        <input type="submit" value="Send Campaign" />
+                    </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function () {
+        $('#dtVerticalScrollExample').DataTable({
+            "scrollY": "200px",
+            "scrollCollapse": true,
+        });
+        $('.dataTables_length').addClass('bs-select');
+    });
+</script>

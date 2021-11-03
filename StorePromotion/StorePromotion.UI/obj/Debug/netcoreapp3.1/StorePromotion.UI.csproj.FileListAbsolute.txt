@@ -184,3 +184,5 @@ D:\WorkNew\StorePromotion\StorePromotion\StorePromotion.UI\bin\Debug\netcoreapp3
 D:\WorkNew\StorePromotion\StorePromotion\StorePromotion.UI\bin\Debug\netcoreapp3.1\uk\GridMvc.resources.dll
 D:\WorkNew\StorePromotion\StorePromotion\StorePromotion.UI\obj\Debug\netcoreapp3.1\StorePromotion.UI.GeneratedMSBuildEditorConfig.editorconfig
 D:\WorkNew\StorePromotion\StorePromotion\StorePromotion.UI\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Promotions.cshtml.g.cs
+D:\WorkNew\StorePromotion\StorePromotion\StorePromotion.UI\bin\Debug\netcoreapp3.1\WebGridMvc.dll
+D:\WorkNew\StorePromotion\StorePromotion\StorePromotion.UI\bin\Debug\netcoreapp3.1\Twilio.dll

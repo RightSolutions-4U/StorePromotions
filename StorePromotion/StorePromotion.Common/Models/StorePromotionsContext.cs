@@ -51,7 +51,7 @@ namespace StorePromotion.Common.Models
 
             modelBuilder.Entity<Campaign>(entity =>
             {
-                entity.HasKey(e => new { e.CampaignId, e.StoreId });
+                entity.HasKey(e => new { e.CampaignId });
 
                 entity.ToTable("Campaign");
 
@@ -73,7 +73,7 @@ namespace StorePromotion.Common.Models
 
             modelBuilder.Entity<Customer>(entity =>
             {
-                entity.HasKey(e => new { e.CustId, e.StoreId });
+                entity.HasKey(e => new { e.CustId});
 
                 entity.ToTable("Customer");
 
@@ -94,14 +94,18 @@ namespace StorePromotion.Common.Models
 
             modelBuilder.Entity<CustomerCampaign>(entity =>
             {
-                entity.HasNoKey();
+
+                entity.HasKey(e => new { e.RecId });
 
                 entity.ToTable("CustomerCampaign");
             });
 
             modelBuilder.Entity<Store>(entity =>
             {
-                entity.HasKey(e => new { e.StoreId, e.OwnerId });
+                entity.HasKey(e => new { e.StoreId });
+                
+                
+                /*FK_Store_StoreOwner*/
 
                 entity.ToTable("Store");
 

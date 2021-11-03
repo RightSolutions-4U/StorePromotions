@@ -39,6 +39,18 @@ namespace StorePromotion.API.Controllers
             return customer;
         }
 
+        [HttpGet("GetCustomerWithStoreId")]
+        public async Task<ActionResult<IEnumerable<Customer>>> GetCustomerWithStoreId(int storeid)
+        {
+            var customer = await _context.Customers.Where(a => a.StoreId == storeid)
+                    .ToListAsync();
+            if (customer == null)
+            {
+                return NotFound();
+            }
+
+            return customer;
+        }
         // PUT: api/AdminUser/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
